@@ -11,9 +11,10 @@
 
 <h:body> 
 	<h:form>
-		<p:inputText value="#{myBean.myText}" placeholder="Mettimi un testo" />
-		<p:commandButton value="Submit" update="outLabel"/>
-		<p:outputLabel id="outLabel" value="#{myBean.myText}"/>
+		<p:growl id="growl" showDetail="true" sticky="false"/>
+		<p:inputText value="#{myBean.myText}" placeholder="Insert text" />
+		<p:commandButton value="Submit" update="growl" actionListener="#{myBean.addMessage()}"/>
+		<!-- <p:outputLabel id="outLabel" value="#{myBean.myText}"/> -->
 	</h:form>
 </h:body>
 </html>
