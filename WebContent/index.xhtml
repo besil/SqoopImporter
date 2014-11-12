@@ -12,11 +12,16 @@
 <h:body>
 	<h:outputStylesheet name="css/default.css" />
 	<h:form>
+		<p:commandButton value="Sqoop import"
+			action="sqoop?faces-redirect=true" />
+	</h:form>
+	<!--
+	<h:form>
 		<p:growl id="growl" showDetail="true" sticky="false" />
 		<p:inputText value="#{myBean.myText}" placeholder="Insert text" />
 		<p:commandButton value="Submit" update="growl"
 			actionListener="#{myBean.addMessage()}" />
-		<!-- <p:outputLabel id="outLabel" value="#{myBean.myText}"/> -->
 	</h:form>
+	-->
 </h:body>
 </html>

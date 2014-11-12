@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Sqoop Builder</title>
+</h:head>
+<h:body>
+	<h:outputStylesheet name="css/default.css" />
+	<h:form>
+		<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
+			<h:outputLabel for="username" value="Username: " />
+			<p:inplace id="username" editor="true">
+				<p:inputText value="#{sqoopCommand.username}" required="true"
+					label="text" />
+			</p:inplace>
+
+			<h:outputLabel for="password" value="Password: " />
+			<p:inplace id="password" editor="true">
+				<p:inputText value="#{sqoopCommand.password}" required="true"
+					label="text" />
+			</p:inplace>
+
+			<!-- jdbc:postgresql://tst-repodb.pochdp.csi.it:5432
+			
+			<p:outputLabel for="connectionUrl" value="Connection Url: " />
+			<p:inputMask id="connectionUrl" 
+				value="#{sqoopCommand.connectionUrl}" 
+				mask="(999) 999-9999? 99999"
+			/>
+			 -->
+			<h:outputLabel for="connUrl" value="Connection Url " />
+			<p:inplace id="connUrl" editor="true">
+				<p:inputText value="#{sqoopCommand.connectionUrl}" required="true"
+					label="text" size="100"/>
+			</p:inplace>
+
+			<!-- 
+			<h:outputLabel for="event" value="Dblclick" />
+			<p:inplace id="event" label="Cities" effectSpeed="fast"
+				event="dblclick">
+				<h:selectOneMenu>
+					<f:selectItem itemLabel="New York" itemValue="0" />
+					<f:selectItem itemLabel="London" itemValue="1" />
+					<f:selectItem itemLabel="Paris" itemValue="2" />
+					<f:selectItem itemLabel="Berlin" itemValue="3" />
+				</h:selectOneMenu>
+			</p:inplace>
+
+			<h:outputLabel for="facet" value="Facet:" />
+			<p:inplace id="facet" effect="none">
+				<f:facet name="output">
+                Yes or No
+            </f:facet>
+				<f:facet name="input">
+					<h:selectBooleanCheckbox />
+				</f:facet>
+			</p:inplace>
+			 -->
+		</h:panelGrid>
+
+	</h:form>
+
+	<p:commandButton value="Clear" actionListener="#{sqoopCommand.clear()}"
+		update="finalSqoop" />
+	<p:commandButton value="Create"
+		actionListener="#{sqoopCommand.generate()}" update="finalSqoop" />
+	<br />
+	
+	<p:outputLabel id="finalSqoop" value="#{sqoopCommand.finalCommand}" />
+
+
+</h:body>
+</html>
