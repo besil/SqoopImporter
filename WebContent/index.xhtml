@@ -1,19 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Main Index</title>
 </h:head>
 
-<h:body> 
+<h:body>
+	<h:outputStylesheet name="css/default.css" />
 	<h:form>
-		<p:growl id="growl" showDetail="true" sticky="false"/>
+		<p:growl id="growl" showDetail="true" sticky="false" />
 		<p:inputText value="#{myBean.myText}" placeholder="Insert text" />
-		<p:commandButton value="Submit" update="growl" actionListener="#{myBean.addMessage()}"/>
+		<p:commandButton value="Submit" update="growl"
+			actionListener="#{myBean.addMessage()}" />
 		<!-- <p:outputLabel id="outLabel" value="#{myBean.myText}"/> -->
 	</h:form>
 </h:body>
