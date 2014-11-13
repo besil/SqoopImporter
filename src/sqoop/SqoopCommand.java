@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -48,7 +49,6 @@ public class SqoopCommand implements Serializable {
 		this.availableParams.remove(newParam);
 		this.newParam = "Param";
 		this.newValue = "Value";
-		this.optionalParams.entrySet().forEach(x -> System.out.println(x.getKey() +" -> "+ x.getValue()));
 	}
 	
 	public List<Entry<String, String>> getParamList() {
@@ -56,14 +56,9 @@ public class SqoopCommand implements Serializable {
 	}
 	
 	public void generate() {
-		this.getAllParams().entrySet().forEach(x -> System.out.println( x.getKey()+" -> "+x.getValue() ) );
-		
-		finalCommand = 
-				importCommand +
-				" --username "+ this.mandatoryParams.get("username") +
-				" --password "+ this.mandatoryParams.get("password") +
-				" --connect " + this.mandatoryParams.get("connectionUrl")
-		;
+		finalCommand = importCommand + " "+
+			this.getAllParams().entrySet().stream()
+				.map(entry -> "--"+entry.getKey()+" "+entry.getValue()).collect(Collectors.joining(" "));
 	}
 	
 	public void clear() {
