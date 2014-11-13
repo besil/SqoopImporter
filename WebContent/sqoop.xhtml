@@ -10,25 +10,23 @@
 </h:head>
 <h:body>
 	<h:outputStylesheet name="css/default.css" />
-	<h:form>
-		<h:panelGrid columns="2" columnClasses="column" cellpadding="5"
-			title="Aggiungi un parametro">
+	<h:form id="newParamform">
+		<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
 
 			<p:inplace label="#{sqoopCommand.newParam}" effectSpeed="fast">
-				<h:selectOneMenu>
+				<h:selectOneMenu value="#{sqoopCommand.newParam}">
 					<f:selectItems value="#{sqoopCommand.availableParams}" />
 				</h:selectOneMenu>
 			</p:inplace>
 
 			<p:inplace editor="true">
-				<p:inputText value="#{sqoopCommand.newValue}" required="true"
-					label="text" />
+				<p:inputText value="#{sqoopCommand.newValue}" required="true" label="text" />
 			</p:inplace>
 		</h:panelGrid>
 	</h:form>
 
 	<p:commandButton value="Add param"
-		actionListener="#{sqoopCommand.addParam}" update="riepilogo" />
+		actionListener="#{sqoopCommand.addParam}" update="riepilogo,newParamform" />
 
 	<br /> -------------------------------- <br />
 	<h3>Parametri obbligatori</h3>

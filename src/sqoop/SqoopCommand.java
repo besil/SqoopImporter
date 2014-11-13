@@ -24,7 +24,6 @@ public class SqoopCommand implements Serializable {
 	protected Map<String, String> mandatoryParams;
 	protected Map<String, String> optionalParams;
 	
-	
 	public SqoopCommand() {
 		this.availableParams = new LinkedList<>();
 		this.availableParams.add("split-by");
@@ -44,17 +43,20 @@ public class SqoopCommand implements Serializable {
 	}
 	
 	public void addParam() {
+		System.out.println("Adding "+newParam+" -> "+newValue);
 		this.optionalParams.put(newParam, newValue);
+		this.availableParams.remove(newParam);
 		this.newParam = "Param";
 		this.newValue = "Value";
+		this.optionalParams.entrySet().forEach(x -> System.out.println(x.getKey() +" -> "+ x.getValue()));
 	}
 	
 	public List<Entry<String, String>> getParamList() {
-		return new LinkedList<Entry<String, String>>( this.mandatoryParams.entrySet() );
+		return new LinkedList<Entry<String, String>>( this.getAllParams().entrySet() );
 	}
 	
 	public void generate() {
-		this.mandatoryParams.entrySet().forEach(x -> System.out.println( x.getKey()+" -> "+x.getValue() ) );
+		this.getAllParams().entrySet().forEach(x -> System.out.println( x.getKey()+" -> "+x.getValue() ) );
 		
 		finalCommand = 
 				importCommand +
