@@ -36,10 +36,9 @@ public class SqoopCommand implements Serializable {
 		this.availableParams = new LinkedList<>();
 		this.availableParams.add("split-by");
 		this.availableParams.add("target-dir");
-		this.availableParams.add("table");
+		this.availableParams.add("hive-table");
 		this.availableParams.add("hive-import");
 		this.availableParams.add("hive-overwrite");
-		this.availableParams.add("hive-table");
 		
 		Collections.sort(this.availableParams);
 
@@ -52,6 +51,7 @@ public class SqoopCommand implements Serializable {
 		this.mandatoryParams.put("username", "username");
 		this.mandatoryParams.put("password", "passwd");
 		this.mandatoryParams.put("connectionUrl", "jdbc:db://hostname:port");
+		this.mandatoryParams.put("table", "tableName");
 	}
 
 	public void removeParam(Entry<String, String> entry) {
