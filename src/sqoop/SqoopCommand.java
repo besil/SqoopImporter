@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,12 +37,16 @@ public class SqoopCommand implements Serializable {
 		this.availableParams.add("split-by");
 		this.availableParams.add("target-dir");
 		this.availableParams.add("table");
+		this.availableParams.add("hive-import");
+		this.availableParams.add("hive-overwrite");
+		this.availableParams.add("hive-table");
+		
 		Collections.sort(this.availableParams);
 
 		this.optionalParams = new HashMap<>();
 
 		this.newParam = "Param";
-		this.newValue = "Value";
+		this.newValue = "Val";
 
 		this.mandatoryParams = new HashMap<>();
 		this.mandatoryParams.put("username", "username");
@@ -62,7 +67,14 @@ public class SqoopCommand implements Serializable {
 	}
 
 	public List<Entry<String, String>> getParamList() {
-		return new LinkedList<Entry<String, String>>( this.getAllParams().entrySet() );
+		LinkedList<Entry<String, String>> l = new LinkedList<Entry<String, String>>( this.getAllParams().entrySet() );
+		Collections.sort(l, new Comparator<Entry<String, String>>() {
+			@Override
+			public int compare(Entry<String, String> e1, Entry<String, String> e2) {
+				return e1.getKey().compareTo(e2.getKey());
+			}
+		});
+		return l;
 	}
 
 	protected String buildCommand() {
