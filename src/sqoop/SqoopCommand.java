@@ -21,7 +21,6 @@ public class SqoopCommand implements Serializable {
 				" --password "+ password +
 				" --connect " + connectionUrl
 		;
-				
 	}
 	
 	public void clear() {
