@@ -4,11 +4,13 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 import javax.ejb.Stateful;
+import javax.enterprise.context.Dependent;
 
 import annotations.Sqoop;
 
 @Sqoop
 @Stateful
+@Dependent
 public class SqoopCommand extends Command {
 	protected final String importCommand = "sqoop import";
 	
