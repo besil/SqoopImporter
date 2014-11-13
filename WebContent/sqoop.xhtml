@@ -11,17 +11,45 @@
 <h:body>
 	<h:outputStylesheet name="css/default.css" />
 	<h:form>
+		<h:panelGrid columns="2" columnClasses="column" cellpadding="5"
+			title="Aggiungi un parametro">
+
+			<p:inplace label="#{sqoopCommand.newParam}" effectSpeed="fast">
+				<h:selectOneMenu>
+					<f:selectItems value="#{sqoopCommand.availableParams}" />
+				</h:selectOneMenu>
+			</p:inplace>
+
+			<p:inplace editor="true">
+				<p:inputText value="#{sqoopCommand.newValue}" required="true"
+					label="text" />
+			</p:inplace>
+		</h:panelGrid>
+	</h:form>
+
+	<p:commandButton value="Add param"
+		actionListener="#{sqoopCommand.addParam}" update="riepilogo" />
+
+	<br /> -------------------------------- <br />
+	<h3>Parametri obbligatori</h3>
+
+	<h:form>
 		<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
+
 			<h:outputLabel for="username" value="Username: " />
 			<p:inplace id="username" editor="true">
-				<p:inputText value="#{sqoopCommand.username}" required="true"
-					label="text" />
+				<p:inputText value="#{sqoopCommand.mandatoryParams['username']}"
+					required="true">
+					<p:ajax update=":riepilogo" />
+				</p:inputText>
 			</p:inplace>
 
 			<h:outputLabel for="password" value="Password: " />
 			<p:inplace id="password" editor="true">
-				<p:inputText value="#{sqoopCommand.password}" required="true"
-					label="text" />
+				<p:inputText value="#{sqoopCommand.mandatoryParams['password']}"
+					required="true" label="text">
+					<p:ajax update=":riepilogo" />
+				</p:inputText>
 			</p:inplace>
 
 			<!-- jdbc:postgresql://tst-repodb.pochdp.csi.it:5432
@@ -34,9 +62,20 @@
 			 -->
 			<h:outputLabel for="connUrl" value="Connection Url " />
 			<p:inplace id="connUrl" editor="true">
-				<p:inputText value="#{sqoopCommand.connectionUrl}" required="true"
-					label="text" size="100"/>
+				<p:inputText value="#{sqoopCommand.mandatoryParams['connectionUrl']}"
+					required="true" label="text" size="100">
+					<p:ajax update=":riepilogo" />
+				</p:inputText>
 			</p:inplace>
+
+
+
+			<!--
+			<p:outputLabel value="Force Selection:" for="acForce" />
+			<p:autoComplete id="acForce" forceSelection="true"
+				value="#{autoCompleteView.txt5}"
+				completeMethod="#{autoCompleteView.completeText}" />
+			-->
 
 			<!-- 
 			<h:outputLabel for="event" value="Dblclick" />
@@ -68,8 +107,26 @@
 		update="finalSqoop" />
 	<p:commandButton value="Create"
 		actionListener="#{sqoopCommand.generate()}" update="finalSqoop" />
-	<br />
-	<br />
+
+
+	<br /> -------------------------------- <br />
+	<h3>Riepilogo</h3>
+
+	<p:dataTable var="p" value="#{sqoopCommand.paramList}" id="riepilogo">
+		<p:column headerText="Parameter Name">
+			<h:outputText value="#{p.key}" />
+		</p:column>
+		<p:column headerText="Parameter Value">
+			<h:outputText value="#{p.value}" />
+		</p:column>
+	</p:dataTable>
+
+
+
+
+	<br /> -------------------------------- <br />
+	<h3>Result</h3>
+
 	<p:outputLabel id="finalSqoop" value="#{sqoopCommand.finalCommand}" />
 
 
