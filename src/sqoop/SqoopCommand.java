@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.model.DefaultStreamedContent;
@@ -25,6 +26,7 @@ public class SqoopCommand implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String finalCommand;
 	protected List<String> availableParams;
+	@Inject protected IGreeter g;
 
 	protected String newParam, newValue;
 
