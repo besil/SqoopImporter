@@ -19,7 +19,6 @@ public class SqoopCommand extends Command {
 		this.availableParams.add("hive-import");
 		this.availableParams.add("hive-overwrite");
 		
-		
 		this.mandatoryParams.put("username", "username");
 		this.mandatoryParams.put("password", "passwd");
 		this.mandatoryParams.put("connectionUrl", "jdbc:db://hostname:port");
