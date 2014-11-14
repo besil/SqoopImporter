@@ -63,7 +63,10 @@ public class SqoopController implements Serializable {
 	}
 	
 	public StreamedContent download() throws IOException {
-		String script = "#!/bin/sh\n\n"+sqoop.getFinalCommand();
+		String script = "#!/bin/sh\n";
+		script += "# Created by S.B. @ Juice Reply\n";
+		script += sqoop.getFinalCommand()+"\n\n";
+		script += "# Thanks for using\n";
 		InputStream is = new ByteArrayInputStream(script.getBytes());
 		return new DefaultStreamedContent(is, "plain/text", "sqoopImport.sh");
 	}
