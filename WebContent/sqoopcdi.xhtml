@@ -11,111 +11,124 @@
 <h:body>
 	<h:outputStylesheet name="css/default.css" />
 
-	<h3>Aggiungi un parametro</h3>
-	<h:form id="newParamform">
-		<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
-			<p:inplace label="#{sqoopController.sqoop.newParam}" effectSpeed="fast">
-				<h:selectOneMenu value="#{sqoopController.sqoop.newParam}">
-					<f:selectItems value="#{sqoopController.sqoop.availableParams}" />
-				</h:selectOneMenu>
-			</p:inplace>
 
-			<p:inplace editor="true">
-				<p:inputText value="#{sqoopController.sqoop.newValue}" required="false"
-					label="text" />
-			</p:inplace>
-		</h:panelGrid>
-	</h:form>
+	<p:layout>
+	
+		<p:layoutUnit position="west" size="30%">
+			<h3>Aggiungi un parametro</h3>
+			<h:form id="newParamform">
+				<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
+					<p:inplace label="#{sqoopController.sqoop.newParam}"
+						effectSpeed="fast">
+						<h:selectOneMenu value="#{sqoopController.sqoop.newParam}">
+							<f:selectItems value="#{sqoopController.sqoop.availableParams}" />
+						</h:selectOneMenu>
+					</p:inplace>
 
-	<p:commandButton value="Add param"
-		actionListener="#{sqoopController.sqoop.addParam}"
-		update="riepilogo,newParamform" />
+					<p:inplace editor="true">
+						<p:inputText value="#{sqoopController.sqoop.newValue}"
+							required="false" label="text" />
+					</p:inplace>
+				</h:panelGrid>
+			</h:form>
 
+			<p:commandButton value="Add param"
+				actionListener="#{sqoopController.sqoop.addParam}"
+				update="riepilogo,newParamform" />
+		</p:layoutUnit>
 
-	<h3>Parametri obbligatori</h3>
-	<h:form>
-		<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
+		<p:layoutUnit position="center">
+			<h3>Riepilogo</h3>
+			<h:form id="riepilogo">
+				<div align="center">
+					<p:dataTable var="p" value="#{sqoopController.paramList}"
+						resizableColumns="true" liveResize="true" style="width:80%;">
+						<p:column headerText="Parameter Name">
+							<h:outputText value="#{p.key}" />
+						</p:column>
+						<p:column headerText="Parameter Value">
+							<h:outputText value="#{p.value}" />
+						</p:column>
+						<p:column headerText="Actions">
+							<p:commandButton icon="ui-icon-trash" title="Delete this item"
+								actionListener="#{sqoopController.sqoop.removeParam(p)}"
+								rendered="#{sqoopController.sqoop.optionalParams.containsKey(p.key)}"
+								update="riepilogo,newParamForm" ajax="false" />
+						</p:column>
+					</p:dataTable>
+				</div>
+			</h:form>
 
-			<h:outputLabel for="username" value="Username: " />
-			<p:inplace id="username" editor="true">
-				<p:inputText value="#{sqoopController.sqoop.mandatoryParams['username']}"
-					required="true">
-					<p:ajax update=":riepilogo" />
-				</p:inputText>
-			</p:inplace>
-
-			<h:outputLabel for="password" value="Password: " />
-			<p:inplace id="password" editor="true">
-				<p:inputText value="#{sqoopController.sqoop.mandatoryParams['password']}"
-					required="true" label="text">
-					<p:ajax update=":riepilogo" />
-				</p:inputText>
-			</p:inplace>
-
-			<h:outputLabel for="connUrl" value="Connection Url: " />
-			<p:inplace id="connUrl" editor="true">
-				<p:inputText
-					value="#{sqoopController.sqoop.mandatoryParams['connectionUrl']}"
-					required="true" label="text" size="100">
-					<p:ajax update=":riepilogo" />
-				</p:inputText>
-			</p:inplace>
-
-			<h:outputLabel for="table" value="Table: " />
-			<p:inplace id="table" editor="true">
-				<p:inputText
-					value="#{sqoopController.sqoop.mandatoryParams['table']}"
-					required="true" label="text" size="100">
-					<p:ajax update=":riepilogo" />
-				</p:inputText>
-			</p:inplace>
-
-		</h:panelGrid>
-
-	</h:form>
-
-	<h3>Riepilogo</h3>
-	<h:form id="riepilogo">
-		<div align="center">
-			<p:dataTable var="p" value="#{sqoopController.paramList}"
-				resizableColumns="true" liveResize="true" style="width:80%;">
-				<p:column headerText="Parameter Name">
-					<h:outputText value="#{p.key}" />
-				</p:column>
-				<p:column headerText="Parameter Value">
-					<h:outputText value="#{p.value}" />
-				</p:column>
-				<p:column headerText="Actions">
-					<p:commandButton icon="ui-icon-trash" title="Delete this item"
-						actionListener="#{sqoopController.sqoop.removeParam(p)}"
-						rendered="#{sqoopController.sqoop.optionalParams.containsKey(p.key)}"
-						update="riepilogo,newParamForm" ajax="false" />
-				</p:column>
-			</p:dataTable>
-		</div>
-	</h:form>
-
-	<br />
-
-	<h:panelGrid columns="3" columnClasses="column" cellpadding="5">
-		<p:commandButton value="Clear"
-			actionListener="#{sqoopController.sqoop.clear()}" update="finalSqoop" />
-		<p:commandButton value="Create"
-			actionListener="#{sqoopController.sqoop.generate()}" update="finalSqoop" />
-		<h:form>
-			<p:commandButton value="Download" ajax="false"
-				icon="ui-icon-arrowthick-1-s">
-				<p:fileDownload value="#{sqoopController.download()}" />
-			</p:commandButton>
-		</h:form>
-		<!-- 
+			<h:panelGrid columns="3" columnClasses="column" cellpadding="5">
+				<p:commandButton value="Clear"
+					actionListener="#{sqoopController.sqoop.clear()}"
+					update="finalSqoop" />
+				<p:commandButton value="Create"
+					actionListener="#{sqoopController.sqoop.generate()}"
+					update="finalSqoop" />
+				<h:form>
+					<p:commandButton value="Download" ajax="false"
+						icon="ui-icon-arrowthick-1-s">
+						<p:fileDownload value="#{sqoopController.download()}" />
+					</p:commandButton>
+				</h:form>
+				<!-- 
 		<h:commandButton value="Download"
 			actionListener="#{sqoopController.sqoop.download()}" />
 		-->
-	</h:panelGrid>
+			</h:panelGrid>
 
-	<h3>Result</h3>
-	<p:outputLabel id="finalSqoop" value="#{sqoopController.sqoop.finalCommand}" />
+			<h3>Result</h3>
+			<p:outputLabel id="finalSqoop"
+				value="#{sqoopController.sqoop.finalCommand}" />
+
+
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" size="30%">
+			<h3>Parametri obbligatori</h3>
+			<h:form>
+				<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
+
+					<h:outputLabel for="username" value="Username: " />
+					<p:inplace id="username" editor="true">
+						<p:inputText
+							value="#{sqoopController.sqoop.mandatoryParams['username']}"
+							required="true">
+							<p:ajax update=":riepilogo" />
+						</p:inputText>
+					</p:inplace>
+
+					<h:outputLabel for="password" value="Password: " />
+					<p:inplace id="password" editor="true">
+						<p:inputText
+							value="#{sqoopController.sqoop.mandatoryParams['password']}"
+							required="true" label="text">
+							<p:ajax update=":riepilogo" />
+						</p:inputText>
+					</p:inplace>
+
+					<h:outputLabel for="connUrl" value="Connection Url: " />
+					<p:inplace id="connUrl" editor="true">
+						<p:inputText
+							value="#{sqoopController.sqoop.mandatoryParams['connectionUrl']}"
+							required="true" label="text" >
+							<p:ajax update=":riepilogo" />
+						</p:inputText>
+					</p:inplace>
+
+					<h:outputLabel for="table" value="Table: " />
+					<p:inplace id="table" editor="true">
+						<p:inputText
+							value="#{sqoopController.sqoop.mandatoryParams['table']}"
+							required="true" label="text">
+							<p:ajax update=":riepilogo" />
+						</p:inputText>
+					</p:inplace>
+				</h:panelGrid>
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
 
 </h:body>
 </html>
