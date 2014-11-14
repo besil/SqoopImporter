@@ -1,4 +1,4 @@
-package controller;
+package tutorial.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -17,9 +17,8 @@ import javax.inject.Named;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-import annotations.Sqoop;
-
-import command.Command;
+import tutorial.annotations.Sqoop;
+import tutorial.command.Command;
 
 @Named
 @SessionScoped

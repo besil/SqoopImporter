@@ -1,4 +1,4 @@
-package sqoop;
+package tutorial.sqoop;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

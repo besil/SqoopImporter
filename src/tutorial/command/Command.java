@@ -1,4 +1,4 @@
-package command;
+package tutorial.command;
 
 import java.util.HashMap;
 import java.util.LinkedList;

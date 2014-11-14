@@ -1,4 +1,4 @@
-package command;
+package tutorial.command;
 
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import javax.ejb.Stateful;
 import javax.enterprise.context.Dependent;
 
-import annotations.Sqoop;
+import tutorial.annotations.Sqoop;
 
 @Sqoop
 @Stateful
