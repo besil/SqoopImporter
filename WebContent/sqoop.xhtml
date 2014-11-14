@@ -17,14 +17,16 @@
 			<h:form id="newParamform">
 				<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
 					<p:inplace
+						label="Param"
 						effectSpeed="fast">
 						<h:selectOneMenu value="Param" binding="#{newParamKey}">
 							<f:selectItems value="#{sqoopController.availableParams}" />
 						</h:selectOneMenu>
 					</p:inplace>
 
-					<p:inplace editor="true">
-						<p:inputText value="Value"
+					<p:inplace editor="true" label="Value">
+						<p:inputText 
+							placeholder="Value"
 							binding="#{newParamValue}"
 							required="false" label="text" />
 					</p:inplace>
@@ -33,7 +35,8 @@
 
 			<p:commandButton value="Add param"
 				actionListener="#{sqoopController.addParam(newParamKey.value, newParamValue.value)}"
-				update="riepilogo,newParamform" />
+				update="riepilogo,newParamform"
+				/>
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">

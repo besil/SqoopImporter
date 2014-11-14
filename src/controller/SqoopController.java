@@ -19,13 +19,13 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
 import annotations.Sqoop;
-import beans.SqoopCommand;
+import beans.Command;
 
 @Named
 @SessionScoped
 public class SqoopController implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Inject @Sqoop protected SqoopCommand sqoop;
+	@Inject @Sqoop protected Command sqoop;
 	
 	public List<String> getAvailableParams() {
 		return sqoop.getAvailableParams();
