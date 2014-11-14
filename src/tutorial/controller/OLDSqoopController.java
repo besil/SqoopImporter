@@ -20,7 +20,7 @@ import org.primefaces.model.StreamedContent;
 import annotations.Sqoop;
 import tutorial.command.Command;
 
-@Named(value="oldController")
+@Named
 @SessionScoped
 public class OLDSqoopController implements Serializable {
 	private static final long serialVersionUID = 1L;

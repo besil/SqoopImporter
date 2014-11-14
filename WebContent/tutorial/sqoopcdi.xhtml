@@ -18,22 +18,22 @@
 			<h3>Aggiungi un parametro</h3>
 			<h:form id="newParamform">
 				<h:panelGrid columns="2" columnClasses="column" cellpadding="5">
-					<p:inplace label="#{sqoopController.sqoop.newParam}"
+					<p:inplace label="#{oldSqoopController.oldsqoop.newParam}"
 						effectSpeed="fast">
-						<h:selectOneMenu value="#{sqoopController.sqoop.newParam}">
-							<f:selectItems value="#{sqoopController.sqoop.availableParams}" />
+						<h:selectOneMenu value="#{oldSqoopController.oldsqoop.newParam}">
+							<f:selectItems value="#{oldSqoopController.oldsqoop.availableParams}" />
 						</h:selectOneMenu>
 					</p:inplace>
 
 					<p:inplace editor="true">
-						<p:inputText value="#{sqoopController.sqoop.newValue}"
+						<p:inputText value="#{oldSqoopController.oldsqoop.newValue}"
 							required="false" label="text" />
 					</p:inplace>
 				</h:panelGrid>
 			</h:form>
 
 			<p:commandButton value="Add param"
-				actionListener="#{sqoopController.sqoop.addParam}"
+				actionListener="#{oldSqoopController.oldsqoop.addParam}"
 				update="riepilogo,newParamform" />
 		</p:layoutUnit>
 
@@ -41,7 +41,7 @@
 			<h3>Riepilogo</h3>
 			<h:form id="riepilogo">
 				<div align="center">
-					<p:dataTable var="p" value="#{sqoopController.paramList}"
+					<p:dataTable var="p" value="#{oldSqoopController.paramList}"
 						resizableColumns="true" liveResize="true" style="width:80%;">
 						<p:column headerText="Parameter Name">
 							<h:outputText value="#{p.key}" />
@@ -51,8 +51,8 @@
 						</p:column>
 						<p:column headerText="Actions">
 							<p:commandButton icon="ui-icon-trash" title="Delete this item"
-								actionListener="#{sqoopController.sqoop.removeParam(p)}"
-								rendered="#{sqoopController.sqoop.optionalParams.containsKey(p.key)}"
+								actionListener="#{oldSqoopController.oldsqoop.removeParam(p)}"
+								rendered="#{oldSqoopController.oldsqoop.optionalParams.containsKey(p.key)}"
 								update="riepilogo,newParamForm" ajax="false" />
 						</p:column>
 					</p:dataTable>
@@ -61,26 +61,26 @@
 
 			<h:panelGrid columns="3" columnClasses="column" cellpadding="5">
 				<p:commandButton value="Clear"
-					actionListener="#{sqoopController.sqoop.clear()}"
+					actionListener="#{oldSqoopController.oldsqoop.clear()}"
 					update="finalSqoop" />
 				<p:commandButton value="Create"
-					actionListener="#{sqoopController.sqoop.generate()}"
+					actionListener="#{oldSqoopController.oldsqoop.generate()}"
 					update="finalSqoop" />
 				<h:form>
 					<p:commandButton value="Download" ajax="false"
 						icon="ui-icon-arrowthick-1-s">
-						<p:fileDownload value="#{sqoopController.download()}" />
+						<p:fileDownload value="#{oldSqoopController.download()}" />
 					</p:commandButton>
 				</h:form>
 				<!-- 
 		<h:commandButton value="Download"
-			actionListener="#{sqoopController.sqoop.download()}" />
+			actionListener="#{oldSqoopController.oldsqoop.download()}" />
 		-->
 			</h:panelGrid>
 
 			<h3>Result</h3>
 			<p:outputLabel id="finalSqoop"
-				value="#{sqoopController.sqoop.finalCommand}" />
+				value="#{oldSqoopController.oldsqoop.finalCommand}" />
 
 
 		</p:layoutUnit>
@@ -93,7 +93,7 @@
 					<h:outputLabel for="username" value="Username: " />
 					<p:inplace id="username" editor="true">
 						<p:inputText
-							value="#{sqoopController.sqoop.mandatoryParams['username']}"
+							value="#{oldSqoopController.oldsqoop.mandatoryParams['username']}"
 							required="true">
 							<p:ajax update=":riepilogo" />
 						</p:inputText>
@@ -102,7 +102,7 @@
 					<h:outputLabel for="password" value="Password: " />
 					<p:inplace id="password" editor="true">
 						<p:inputText
-							value="#{sqoopController.sqoop.mandatoryParams['password']}"
+							value="#{oldSqoopController.oldsqoop.mandatoryParams['password']}"
 							required="true" label="text">
 							<p:ajax update=":riepilogo" />
 						</p:inputText>
@@ -111,7 +111,7 @@
 					<h:outputLabel for="connUrl" value="Connection Url: " />
 					<p:inplace id="connUrl" editor="true">
 						<p:inputText
-							value="#{sqoopController.sqoop.mandatoryParams['connectionUrl']}"
+							value="#{oldSqoopController.oldsqoop.mandatoryParams['connectionUrl']}"
 							required="true" label="text" >
 							<p:ajax update=":riepilogo" />
 						</p:inputText>
@@ -120,7 +120,7 @@
 					<h:outputLabel for="table" value="Table: " />
 					<p:inplace id="table" editor="true">
 						<p:inputText
-							value="#{sqoopController.sqoop.mandatoryParams['table']}"
+							value="#{oldSqoopController.oldsqoop.mandatoryParams['table']}"
 							required="true" label="text">
 							<p:ajax update=":riepilogo" />
 						</p:inputText>
