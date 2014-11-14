@@ -1,4 +1,4 @@
-package tutorial.annotations;
+package annotations;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;

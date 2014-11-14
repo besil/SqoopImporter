@@ -17,12 +17,12 @@ import javax.inject.Named;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-import tutorial.annotations.Sqoop;
+import annotations.Sqoop;
 import tutorial.command.Command;
 
-@Named
+@Named(value="oldController")
 @SessionScoped
-public class SqoopController implements Serializable {
+public class OLDSqoopController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject @Sqoop protected Command sqoop;

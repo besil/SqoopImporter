@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 import javax.ejb.Stateful;
 import javax.enterprise.context.Dependent;
 
-import tutorial.annotations.Sqoop;
+import annotations.Sqoop;
 
 @Sqoop
 @Stateful
 @Dependent
-public class SqoopCommand extends Command {
+public class OLDSqoopCommand extends Command {
 	protected final String importCommand = "sqoop import";
 	
-	public SqoopCommand() {
+	public OLDSqoopCommand() {
 		super();
 		this.availableParams.add("split-by");
 		this.availableParams.add("target-dir");
